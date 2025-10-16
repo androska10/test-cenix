@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer-core";
+import puppeteer from "puppeteer";
 import fs from 'fs/promises';
 
 const URL = process.argv[2];
@@ -10,7 +10,7 @@ if (!URL) {
 
 (async () => {
     const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/google-chrome',
+        // executablePath: '/usr/bin/google-chrome',
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -67,7 +67,7 @@ if (!URL) {
         console.log('Данные успешно извлечены!');
         
         const products = nextData?.props?.pageProps?.initialStore?.catalogPage?.products || [];
-        
+
         let output = '';
         for (const p of products) {
             const currentPrice = p.price;

@@ -1,4 +1,4 @@
-import puppeteer from 'puppeteer-core';
+import puppeteer from 'puppeteer';
 import fs from 'fs/promises';
 
 const URL = process.argv[2];
@@ -27,7 +27,7 @@ if (!cityId) {
 
 (async () => {
     const browser = await puppeteer.launch({
-        executablePath: '/usr/bin/google-chrome',
+        // executablePath: '/usr/bin/google-chrome',
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
@@ -76,7 +76,7 @@ if (!cityId) {
     let rating = null;
     try {
     const ratingText = await page.$eval('.ActionsRow_stars__EKt42', el => el.textContent.trim());
-    const match = ratingText.match(/[\d,]+/);
+    const match = ratingText.match(/[\d.]+/);
     if (match) {
         rating = parseFloat(match[0].replace(',', '.'));
     }
