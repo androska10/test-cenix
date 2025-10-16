@@ -36,10 +36,11 @@ if (!URL) {
         await browser.close();
         process.exit(1);
     }
-
+    //Для обхода блокировки ботов
     await page.evaluate(() => window.scrollBy(0, 500));
     await new Promise(resolve => setTimeout(resolve, 3000));
     
+    //У сайта нет json с данными вместо этого данные о товарах часто встраиваются в HTML-страницу через #__NEXT_DATA__.
     const hasNextData = await page.$('#__NEXT_DATA__');
         if (!hasNextData) {
             console.error('Тег #__NEXT_DATA__ не найден на странице.');
@@ -64,11 +65,9 @@ if (!URL) {
         }
 
         console.log('Данные успешно извлечены!');
-        console.log('Пример структуры:');
-        console.log(Object.keys(nextData));
         
         const products = nextData?.props?.pageProps?.initialStore?.catalogPage?.products || [];
-
+        
         let output = '';
         for (const p of products) {
             const currentPrice = p.price;

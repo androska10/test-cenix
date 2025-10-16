@@ -29,7 +29,7 @@ if (!cityId) {
     const browser = await puppeteer.launch({
         executablePath: '/usr/bin/google-chrome',
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
 
     const page = await browser.newPage();
@@ -40,7 +40,7 @@ if (!cityId) {
     });
 
     await page.setCookie({
-        name: 'city_id',
+        name: 'region',
         value: cityId,
         domain: '.vprok.ru',
         path: '/',
